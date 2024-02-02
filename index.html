@@ -22,12 +22,12 @@
         <!-- play card -->
         <div class="card outer-card">
             <div class="card card-left">
-                <img src="./img/logo.png" class="card-img-top" alt="...">
-                <ul class="list-group choice">
-                    <li class="list-group-item">HTML</li>
-                    <li class="list-group-item">CSS</li>
-                    <li class="list-group-item">JS</li>
-                    <li class="list-group-item">Java</li>
+                <img src="./img/logo.png" class="image" alt="...">
+                <ul>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JS</li>
+                    <li>Java</li>
                 </ul>
             </div>
             <!-- start card -->
@@ -61,6 +61,9 @@
                 <div>
                     <b id="currentQuestion">1</b> von <b id="numberOfQuestions">5</b> Fragen
                     <button id="next-button" disabled onclick="nextQuestion()" type="button" class="btn btn-primary">Next Question</button>
+                    <div class="progress">
+                        <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                      </div>
                 </div>
             </div>
             <div id="end-screen" style="display: none;">

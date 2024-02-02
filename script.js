@@ -98,6 +98,11 @@ function showQuestion() {
         renderEndScreen();
         currentQuestion = 0;
     } else {
+        let percent = currentQuestion / questions.length;
+        percent = Math.round(percent * 100);
+        console.log('Fortschritt:', percent)
+        document.getElementById('progress-bar').innerHTML = `${percent}%`;
+
         let question = questions[currentQuestion];
         document.getElementById('questionText').innerHTML = question['question'];
         document.getElementById('currentQuestion').innerHTML = currentQuestion + 1;

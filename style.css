@@ -12,13 +12,20 @@
     width: 25%;
     padding: 32px 16px;
     background-color: #26355C !important;
+    display: flex;
+    align-items: center;
 }
 
-.choice {
-    border: none !important;
-    color: white !important;
-    background-color: #26355C !important;
-    margin-top: 32px;
+ul {
+    border: none;
+    color: white;
+    background-color: #26355C;
+    margin-top: 32px !important;
+    list-style: none;
+    list-style-position: outside !important;
+}
+.image {
+    width: 60%;
 }
 
 .card-right {
