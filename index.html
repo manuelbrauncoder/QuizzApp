@@ -18,54 +18,64 @@
 </head>
 
 <body onload="init()">
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">QuizApp</span>
-        </div>
-    </nav>
-
-    <div class="container">
-        <div class="card quiz-card">
-            <img src="./img/logo.png" class="card-img-top" alt="...">
-            <div class="card-body" id="end-screen" style="display: none;">
-                Quizz beendet!
+    <div class="content">
+        <!-- play card -->
+        <div class="card outer-card">
+            <div class="card card-left">
+                <img src="./img/logo.png" class="card-img-top" alt="...">
+                <ul class="list-group choice">
+                    <li class="list-group-item">HTML</li>
+                    <li class="list-group-item">CSS</li>
+                    <li class="list-group-item">JS</li>
+                    <li class="list-group-item">Java</li>
+                </ul>
             </div>
-            <div class="card-body" id="question-body">
-                <h5 class="card-title" id="questionText">Frage</h5>
-
-                <div class="card quiz-answer mb-2" onclick="answer('answer_1')">
-                    <div class="card-body" id="answer_1">
-                        Antwort
+            <!-- start card -->
+            <div class="card" id="start-card">
+                <h2>Welcome to The Awesome HTML Quiz</h1>
+                    <span>Ready for the Challenge?</span>
+                    <button onclick="newGame()" type="button" class="btn btn-secondary">Start Now</button>
+            </div>
+            <div class="card card-right" style="display: none;" id="question-body">
+                <h3 id="questionText">Frage</h2>
+                <div class="card">
+                    <div class="card-body answer-card" onclick="answer('answer_1')" id="answer_1">
+                        This is some text within a card body.
                     </div>
                 </div>
-
-                <div class="card quiz-answer mb-2">
-                    <div class="card-body" id="answer_2" onclick="answer('answer_2')">
-                        Antwort
+                <div class="card">
+                    <div class="card-body answer-card" onclick="answer('answer_2')" id="answer_2">
+                        This is some text within a card body.
                     </div>
                 </div>
-
-                <div class="card quiz-answer mb-2">
-                    <div class="card-body" id="answer_3" onclick="answer('answer_3')">
-                        Antwort
-                    </div> 
-                </div>
-
-                <div class="card quiz-answer mb-2">
-                    <div class="card-body" id="answer_4" onclick="answer('answer_4')">
-                        Antwort
+                <div class="card">
+                    <div class="card-body answer-card" onclick="answer('answer_3')" id="answer_3">
+                        This is some text within a card body.
                     </div>
                 </div>
-
-                <div class="question-footer">
-                    <span>
-                        <b id="currentQuestion">1</b> von <b id="numberOfQuestions">5</b> Fragen
-                    </span>
-
-                    <button id="next-button" disabled onclick="nextQuestion()" class="btn btn-primary">Nächste Frage</button>
+                <div class="card">
+                    <div class="card-body answer-card" onclick="answer('answer_4')" id="answer_4">
+                        This is some text within a card body.
+                    </div>
+                </div>
+                <div>
+                    <b id="currentQuestion">1</b> von <b id="numberOfQuestions">5</b> Fragen
+                    <button id="next-button" disabled onclick="nextQuestion()" type="button" class="btn btn-primary">Next Question</button>
                 </div>
             </div>
+            <div id="end-screen" style="display: none;">
+                <img src="./img/brain result.png" alt="">
+                <h2>Quiz complete</h2>
+                <div class="score">
+                    <p>YOUR SCRORE</p>
+                    <p id="score">10</p>
+                    <p> / </p>
+                    <p id="games">10</p>
+                </div>
+                <button onclick="newGame()" type="button" class="btn btn-primary">Play again</button>
+            </div>
         </div>
+
     </div>
 </body>
 

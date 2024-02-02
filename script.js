@@ -81,6 +81,7 @@ let questions = [
     }
 ];
 let currentQuestion = 0;
+let rightAnswers = 0;
 
 function init() {
     let input = document.getElementById('numberOfQuestions');
@@ -94,11 +95,21 @@ function showQuestion() {
     if (currentQuestion >= questions.length) {
         document.getElementById('end-screen').style = '';
         document.getElementById('question-body').style = 'display: none';
+        renderEndScreen();
+        currentQuestion = 0;
     } else {
         let question = questions[currentQuestion];
         document.getElementById('questionText').innerHTML = question['question'];
         document.getElementById('currentQuestion').innerHTML = currentQuestion + 1;
     }
+}
+
+function renderEndScreen() {
+    let score = document.getElementById('score');
+    let games = document.getElementById('games');
+    score.innerHTML = rightAnswers;
+    games.innerHTML = questions.length;
+
 }
 
 
@@ -115,6 +126,7 @@ function answer(selection) {
     let id = `answer_${question['right_answer']}`;
     if (selectedQuestionNumber == question['right_answer']) {
         document.getElementById(selection).parentNode.classList.add('bg-success');
+        rightAnswers++;
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(id).parentNode.classList.add('bg-success');
@@ -138,4 +150,12 @@ function resetAnswerButtons() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
+
+function newGame() {
+    document.getElementById('end-screen').style = 'display: none';
+    document.getElementById('start-card').style = 'display: none';
+    document.getElementById('question-body').style = '';
+    init();
+    rightAnswers = 0;
 }
