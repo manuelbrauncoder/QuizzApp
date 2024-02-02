@@ -82,6 +82,8 @@ let questions = [
 ];
 let currentQuestion = 0;
 let rightAnswers = 0;
+let AUDIO_SUCCESS = new Audio('audio/success.mp3');
+let AUDIO_FAIL = new Audio('audio/wrong.mp3');
 
 function init() {
     let input = document.getElementById('numberOfQuestions');
@@ -98,10 +100,10 @@ function showQuestion() {
         renderEndScreen();
         currentQuestion = 0;
     } else {
-        let percent = currentQuestion / questions.length;
+        let percent = (currentQuestion + 1) / questions.length;
         percent = Math.round(percent * 100);
-        console.log('Fortschritt:', percent)
         document.getElementById('progress-bar').innerHTML = `${percent}%`;
+        document.getElementById('progress-bar').style = `width: ${percent}%`;
 
         let question = questions[currentQuestion];
         document.getElementById('questionText').innerHTML = question['question'];
@@ -132,9 +134,11 @@ function answer(selection) {
     if (selectedQuestionNumber == question['right_answer']) {
         document.getElementById(selection).parentNode.classList.add('bg-success');
         rightAnswers++;
+        AUDIO_SUCCESS.play();
     } else {
         document.getElementById(selection).parentNode.classList.add('bg-danger');
         document.getElementById(id).parentNode.classList.add('bg-success');
+        AUDIO_FAIL.play();
     }
     document.getElementById('next-button').disabled = false;
 }
