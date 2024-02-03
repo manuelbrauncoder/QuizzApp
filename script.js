@@ -94,28 +94,39 @@ function init() {
 }
 
 function showQuestion() {
-    if (currentQuestion >= questions.length) {
-        document.getElementById('end-screen').style = '';
-        document.getElementById('question-body').style = 'display: none';
+    if (ifGameIsOver()) {
         renderEndScreen();
-        currentQuestion = 0;
     } else {
-        let percent = (currentQuestion + 1) / questions.length;
-        percent = Math.round(percent * 100);
-        document.getElementById('progress-bar').innerHTML = `${percent}%`;
-        document.getElementById('progress-bar').style = `width: ${percent}%`;
-
-        let question = questions[currentQuestion];
-        document.getElementById('questionText').innerHTML = question['question'];
-        document.getElementById('currentQuestion').innerHTML = currentQuestion + 1;
+        updateProgressBar();
+        updateNextQuestion();
     }
 }
 
+function ifGameIsOver() {
+    return currentQuestion >= questions.length
+}
+
+function updateNextQuestion() {
+    let question = questions[currentQuestion];
+    document.getElementById('questionText').innerHTML = question['question'];
+    document.getElementById('currentQuestion').innerHTML = currentQuestion + 1;
+}
+
+function updateProgressBar() {
+    let percent = (currentQuestion + 1) / questions.length;
+    percent = Math.round(percent * 100);
+    document.getElementById('progress-bar').innerHTML = `${percent}%`;
+    document.getElementById('progress-bar').style = `width: ${percent}%`;
+}
+
 function renderEndScreen() {
+    document.getElementById('end-screen').style = '';
+    document.getElementById('question-body').style = 'display: none';
     let score = document.getElementById('score');
     let games = document.getElementById('games');
     score.innerHTML = rightAnswers;
     games.innerHTML = questions.length;
+    currentQuestion = 0;
 
 }
 
@@ -131,16 +142,29 @@ function answer(selection) {
     let question = questions[currentQuestion];
     let selectedQuestionNumber = selection.slice(-1);
     let id = `answer_${question['right_answer']}`;
-    if (selectedQuestionNumber == question['right_answer']) {
-        document.getElementById(selection).parentNode.classList.add('bg-success');
-        rightAnswers++;
-        AUDIO_SUCCESS.play();
+    if (rightAnswerSelected(selectedQuestionNumber)) {
+        answerIsRight(selection);
     } else {
-        document.getElementById(selection).parentNode.classList.add('bg-danger');
-        document.getElementById(id).parentNode.classList.add('bg-success');
-        AUDIO_FAIL.play();
+        answerIsWrong(selection, id);
     }
     document.getElementById('next-button').disabled = false;
+}
+
+function answerIsRight(selection) {
+    document.getElementById(selection).parentNode.classList.add('bg-success');
+    rightAnswers++;
+    AUDIO_SUCCESS.play();
+}
+
+function answerIsWrong(selection, id) {
+    document.getElementById(selection).parentNode.classList.add('bg-danger');
+    document.getElementById(id).parentNode.classList.add('bg-success');
+    AUDIO_FAIL.play();
+}
+
+function rightAnswerSelected(selectedQuestionNumber) {
+    let question = questions[currentQuestion];
+    return selectedQuestionNumber == question['right_answer'];
 }
 
 function nextQuestion() {
